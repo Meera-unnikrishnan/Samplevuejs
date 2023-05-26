@@ -14,7 +14,7 @@
         <button class="btn" @click="SubmitTask">ADD</button>
       </div>
     </center>
-    <TaskTable :tasks="tasks" @delete="deleteTask" @edit="editTask" />
+    <TaskTable :tasks="tasks" @delete="confirmDelete" @edit="editTask" />
   </div>
 </template>
 
@@ -47,6 +47,14 @@ export default {
     };
   },
   methods: {
+    confirmDelete(index) {
+      const confirmation = confirm(
+        "Are you sure you want to delete this task?"
+      );
+      if (confirmation) {
+        this.deleteTask(index);
+      }
+    },
     deleteTask(index) {
       this.tasks.splice(index, 1);
     },
@@ -59,12 +67,20 @@ export default {
         return;
       }
       if (this.editTaskIndex !== null) {
-        this.tasks[this.editTaskIndex].task = this.task;
-        this.editTaskIndex = null;
+        const confirmation = confirm(
+          "Are you sure you want to edit this task?"
+        );
+        if (confirmation) {
+          this.tasks[this.editTaskIndex].task = this.task;
+          this.editTaskIndex = null;
+        }
       } else {
-        this.tasks.push({
-          task: this.task,
-        });
+        const confirmation = confirm("Are you sure you want to add this task?");
+        if (confirmation) {
+          this.tasks.push({
+            task: this.task,
+          });
+        }
       }
       this.task = "";
     },
