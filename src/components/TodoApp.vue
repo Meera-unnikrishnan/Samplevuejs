@@ -14,41 +14,25 @@
         <button class="btn" @click="SubmitTask">ADD</button>
       </div>
     </center>
-    <table border="{3}">
-      <thead>
-        <tr>
-          <th>Task</th>
-          <th>Delete</th>
-          <th>Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(task, index) in tasks" :key="index">
-        
-          <td align="center">{{ task.task }}</td>
-
-          <td>
-            <button class="delbtn" @click="deleteTask(index)">Delete</button>
-          </td>
-          <td>
-            <button class="editbtn" @click="EditTask(index)">Edit</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <TaskTable :tasks="tasks" @delete="deleteTask" @edit="editTask" />
   </div>
 </template>
 
 <script>
+import TaskTable from "./TaskTable.vue";
+
 export default {
   name: "TodoApp",
   props: {
     msg: String,
   },
+  components: {
+    TaskTable,
+  },
   data() {
     return {
       task: "",
-      editTask: null,
+      editTaskIndex: null,
       tasks: [
         {
           task: "Learning React js",
@@ -66,23 +50,23 @@ export default {
     deleteTask(index) {
       this.tasks.splice(index, 1);
     },
-
-    EditTask(index) {
-      (this.task = this.tasks[index].task), (this.editTask = index);
+    editTask(index) {
+      this.task = this.tasks[index].task;
+      this.editTaskIndex = index;
     },
-
     SubmitTask() {
       if (this.task.length === 0) {
         return;
       }
-      if (this.editTask != null) {
-        this.tasks[this.editTask].task = this.task;
-        this.editTask = null;
+      if (this.editTaskIndex !== null) {
+        this.tasks[this.editTaskIndex].task = this.task;
+        this.editTaskIndex = null;
       } else {
         this.tasks.push({
           task: this.task,
         });
       }
+      this.task = "";
     },
   },
 };
@@ -92,7 +76,6 @@ export default {
 .container {
   width: 900px;
   margin: auto;
- 
   height: 100vh;
   font-size: 30px;
 }
@@ -102,13 +85,6 @@ export default {
   margin-right: 10px;
   height: 30px;
 }
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-top: 20px;
-  border-width: thin;
-  height: 60%;
-}
 
 .btn {
   border: none;
@@ -117,29 +93,6 @@ table {
   padding: 2px;
   background-color: black;
   color: white;
-  border-radius:10px;
+  border-radius: 10px;
 }
-
-.delbtn {
-  border: none;
-  background-color: red;
-  color: white;
-  height:25%;
-  width:50%;
-  border-radius:20px;
-  font-size:20px;
-  margin:30px;
-}
-
-.editbtn {
-  border: none;
-  background-color: #77b631;
-  color: white;
-  height:25%;
-  width:50%;
-  border-radius:20px;
-  font-size:20px;
-   margin:30px;
-}
-
 </style>
