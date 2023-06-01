@@ -1,8 +1,18 @@
 <template>
-  <button class="delbtn" @click="handleDelete">Delete</button>
+  <!-- <button class="delbtn" @click="handleDelete">Delete</button> -->
+ <div>
+ 
+   <v-btn class="ml-5" color="error" @click="handleDelete">
+    <v-icon left>
+            mdi-delete
+        </v-icon>
+        Delete
+        </v-btn>
+   </div>
 </template>
 
 <script>
+
 export default {
   methods: {
     handleDelete() {
@@ -12,7 +22,7 @@ export default {
 };
 </script>
 <style>
-.delbtn {
+/* .delbtn {
   border: none;
   background-color: red;
   color: white;
@@ -21,5 +31,5 @@ export default {
   border-radius: 20px;
   font-size: 20px;
   margin: 30px;
-}
+} */
 </style>

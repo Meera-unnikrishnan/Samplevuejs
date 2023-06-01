@@ -4,14 +4,24 @@
       <h2 class="heading">Todo List</h2>
     </center>
     <center>
-      <div>
-        <input
+      <v-col cols="12" sm="6" md="6">
+        <v-text-field
+          placeholder="New Task Here"
+          outlined
+          v-model="task"
+        ></v-text-field>
+      </v-col>
+      <!-- <input
           class="input-text"
           type="text"
-          v-model="task"
           placeholder="New Task here.."
-        />
-        <button class="btn" @click="SubmitTask">ADD</button>
+        /> -->
+
+      <div>
+        <v-btn x-large rounded color="success" dark @click="SubmitTask">
+          <v-icon dark> mdi-plus </v-icon>
+          ADD
+        </v-btn>
       </div>
     </center>
     <TaskTable :tasks="tasks" @delete="confirmDelete" @edit="editTask" />
@@ -96,13 +106,13 @@ export default {
   font-size: 30px;
 }
 
-.input-text {
+/* .input-text {
   border-radius: 10px;
   margin-right: 10px;
   height: 30px;
-}
+} */
 
-.btn {
+/* .btn {
   border: none;
   width: 80px;
   height: 40px;
@@ -110,5 +120,5 @@ export default {
   background-color: black;
   color: white;
   border-radius: 10px;
-}
+} */
 </style>

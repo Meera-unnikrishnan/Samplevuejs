@@ -1,5 +1,12 @@
 <template>
-  <button class="editbtn" @click="handleEdit">Edit</button>
+  <!-- <button class="editbtn" @click="handleEdit">Edit</button> -->
+  <v-btn class="ml-5" color="success" @click="handleEdit">
+     <v-icon left>
+            mdi-pencil
+        </v-icon>
+        Edit
+  </v-btn>
+  
 </template>
 
 <script>
@@ -12,7 +19,7 @@ export default {
 };
 </script>
 <style>
-.editbtn {
+/* .editbtn {
   border: none;
   background-color: #77b631;
   color: white;
@@ -21,5 +28,5 @@ export default {
   border-radius: 20px;
   font-size: 20px;
   margin: 30px;
-}
+} */
 </style>
